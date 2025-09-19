@@ -1,4 +1,4 @@
-const urlBase = 'https://cop4331-lamp.csprojects.dev/';
+const urlBase = 'https://cop4331-lamp.csprojects.dev';
 const extension = 'php';
 
 let userId = 0;
