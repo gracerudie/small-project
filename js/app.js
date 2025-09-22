@@ -1,5 +1,5 @@
 (() => {
-  const API_BASE = 'https://cop4331-lamp.csprojects.dev/LAMPAPI/'; // absolute path for endpoints
+  const API_BASE = 'http://localhost/small-project/LAMPAPI/'; // absolute path for endpoints
 
   // Elements
   const welcomeView = id('welcomeView');
