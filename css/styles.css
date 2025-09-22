@@ -260,4 +260,5 @@ tbody tr:hover {
   .link-btn:hover { color: #006cd8}
   #userGreeting { color: #f5f5f5; }
   .msg { color: #ff6b6b }
+  .msg.success { color: #3ddb3d; }
 }
