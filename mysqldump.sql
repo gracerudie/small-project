@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `FirstName` varchar(50) NOT NULL DEFAULT '',
   `LastName` varchar(50) NOT NULL DEFAULT '',
   `Login` varchar(50) NOT NULL DEFAULT '',
-  `Password` varchar(50) NOT NULL DEFAULT '',
+  `Password` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
