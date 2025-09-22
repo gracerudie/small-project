@@ -257,4 +257,5 @@ tbody tr:hover {
   .table-wrapper { background:#fafafa; color: #000}
   .link-btn { color: #4da6ff}
   #userGreeting { color: #f5f5f5; }
+  .msg { color: #ff8080 }
 }
