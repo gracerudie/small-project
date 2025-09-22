@@ -172,6 +172,7 @@ thead { background:#0044ff; color:#fff; box-shadow:0 2px 6px -2px rgba(0,0,0,.25
   width:100%;
   margin:.25rem 0 1rem;
   font-size:1rem;
+  box-sizing: border-box; /* includes padding & border in width */
 }
 
 .table-wrapper {
