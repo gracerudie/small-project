@@ -1,58 +1,35 @@
-
 <?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+if ($_SERVER['REQUEST_METHOD']==='OPTIONS'){ http_response_code(200); echo json_encode(["error"=>""]); exit; }
 
-	$inData = getRequestInfo();
-	
-	$id = 0;
-	$firstName = "";
-	$lastName = "";
+function getRequestInfo(){ return json_decode(file_get_contents('php://input'), true); }
+function sendJson($arr,$status=200){ http_response_code($status); echo json_encode($arr); exit; }
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-	if( $conn->connect_error )
-	{
-		returnWithError( $conn->connect_error );
-	}
-	else
-	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
+$inData = getRequestInfo();
+$login = trim($inData['login'] ?? '');
+$password = trim($inData['password'] ?? '');
+if($login===''||$password===''){ sendJson(["id"=>0,"firstName"=>"","lastName"=>"","error"=>'Missing credentials'],400);} 
 
-		if( $row = $result->fetch_assoc()  )
-		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
-		}
-		else
-		{
-			returnWithError("No Records Found");
-		}
+require_once __DIR__.'/db.php';
+if(!isset($conn) || !($conn instanceof mysqli)){ sendJson(["id"=>0,"firstName"=>"","lastName"=>"","error"=>'DB init failed'],500);} 
 
-		$stmt->close();
-		$conn->close();
-	}
-	
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
-
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-	function returnWithInfo( $firstName, $lastName, $id )
-	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
+// Fetch user by login
+$stmt = $conn->prepare('SELECT ID, FirstName, LastName, Password FROM Users WHERE Login=?');
+if(!$stmt){ sendJson(["id"=>0,"firstName"=>"","lastName"=>"","error"=>'Prepare failed'],500);} 
+if(!$stmt->bind_param('s',$login)){ $stmt->close(); sendJson(["id"=>0,"firstName"=>"","lastName"=>"","error"=>'Bind failed'],500);} 
+if(!$stmt->execute()){ $err=$stmt->error; $stmt->close(); sendJson(["id"=>0,"firstName"=>"","lastName"=>"","error"=>$err],500);} 
+$res = $stmt->get_result();
+if($row = $res->fetch_assoc()){
+  $stored = $row['Password'];
+  $valid = password_verify($password, $stored) || $stored === $password; // allow legacy plain-text until migrated
+  if($valid){
+    sendJson(["id"=>(int)$row['ID'],"firstName"=>$row['FirstName'],"lastName"=>$row['LastName'],"error"=>""],200);
+  }
+}
+$stmt->close(); $conn->close();
+sendJson(["id"=>0,"firstName"=>"","lastName"=>"","error"=>'Invalid login'],401);
 ?>
+
