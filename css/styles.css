@@ -45,7 +45,7 @@ body {
 
 .welcome-card .buttons { width:100%; font-size:1rem; border-radius:8px; }
 .welcome-card .buttons + .buttons { margin-top:1rem; }
-.buttons.alt { background:#0272ff; }
+
 
 .or-separator { position:relative; margin:1.1rem 0 .9rem; display:flex; align-items:center; justify-content:center; }
 .or-separator::before { content:""; position:absolute; left:0; right:0; height:1px; background:#d6d6d6; }
@@ -248,14 +248,15 @@ tbody tr:hover {
 
 @media (prefers-color-scheme: dark) {
   body { background:linear-gradient(145deg,#00060e,#001833 35%,#000a16 70%,#001633); color:#f5f5f5;  }
-  .card { background:#3d3d3d; color:#f5f5f5; }
-  .welcome-card { background:#3d3d3d; color:#f5f5f5; }
+  .card { background:#2c2c2c; color:#f5f5f5; }
+  .welcome-card { background:#2c2c2c; color:#f5f5f5; }
   .empty { color: #f5f5f5; }
   input { background:#fff; }
   table { background:#fafafa; }
   th { background:#1d3f99; }
   .table-wrapper { background:#fafafa; color: #000}
   .link-btn { color: #4da6ff}
+  .link-btn:hover { color: #006cd8}
   #userGreeting { color: #f5f5f5; }
-  .msg { color: #ff8080 }
+  .msg { color: #ff6b6b }
 }
