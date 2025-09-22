@@ -254,6 +254,6 @@ tbody tr:hover {
   input { background:#fff; }
   table { background:#fafafa; }
   th { background:#1d3f99; }
-  .table-wrapper { background:#fafafa; }
+  .table-wrapper { background:#fafafa; color: #000}
   #userGreeting { color: #f5f5f5; }
 }
