@@ -1,104 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Contacts Manager</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link href="css/styles.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<title>COP 4331 LAMP Stack Demo</title>
+	<script type="text/javascript" src="js/md5.js"></script>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
-  <h1 id="title" class="hidden">Contacts Manager</h1>
 
-  <!-- Welcome / Landing View -->
-  <section id="welcomeView" class="welcome-container">
-    <div class="welcome-icon">📧</div>
-    <h2 class="welcome-title">Contacts</h2>
-    <div class="welcome-card">
-      <button id="goLogin" class="buttons">Sign In</button>
-      <div class="or-separator"><span>or</span></div>
-      <button id="goRegister" class="buttons alt">Create Account</button>
-    </div>
-  </section>
+<h1 id="title">COP 4331 LAMP Stack Demo</h1>
 
-  <main id="authView" class="hidden">
-    <section class="card" id="loginSection">
-      <h2>Login</h2>
-      <form id="loginForm">
-        <input type="text" id="login_login" placeholder="Username" autocomplete="username" required />
-        <input type="password" id="login_password" placeholder="Password" autocomplete="current-password" required />
-        <button type="submit" class="buttons">Login</button>
-      </form>
-      <div class="alt-action">
-        <button id="showRegister" type="button" class="link-btn">Create an account</button>
-      </div>
-      <div id="loginMessage" class="msg"></div>
-    </section>
+<div id="loginDiv">
+	<span id="inner-title">PLEASE LOG IN</span>
+	<input type="text" id="loginName" placeholder="Username" /><br />
+	<input type="password" id="loginPassword" placeholder="Password"/><br />
+	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
+	<span id="loginResult"></span>
+</div>
 
-    <section class="card hidden" id="registerSection">
-      <h2>Register</h2>
-      <form id="registerForm">
-        <div class="row-2">
-          <input type="text" id="reg_first" placeholder="First Name" required />
-          <input type="text" id="reg_last" placeholder="Last Name" required />
-        </div>
-        <input type="text" id="reg_login" placeholder="Username" autocomplete="username" required />
-        <input type="password" id="reg_password" placeholder="Password" autocomplete="new-password" required />
-        <button type="submit" class="buttons">Register</button>
-      </form>
-      <div class="alt-action">
-        <button id="showLogin" type="button" class="link-btn">Have an account? Login</button>
-      </div>
-      <div id="registerMessage" class="msg"></div>
-    </section>
-  </main>
-
-  <main id="appView" class="hidden">
-    <header id="appHeader">
-      <div id="userGreeting"></div>
-      <button id="logoutBtn" class="buttons small">Logout</button>
-    </header>
-
-    <section class="card" id="addContactCard">
-      <h2>Add Contact</h2>
-      <form id="addContactForm">
-        <div class="row-2">
-          <input type="text" id="add_first" placeholder="First Name" required />
-          <input type="text" id="add_last" placeholder="Last Name" required />
-        </div>
-        <div class="row-2">
-          <input type="tel" id="add_phone" placeholder="Phone" required />
-          <input type="email" id="add_email" placeholder="Email" required />
-        </div>
-        <button type="submit" class="buttons">Add Contact</button>
-      </form>
-      <div id="addMessage" class="msg"></div>
-    </section>
-
-    <section class="card" id="searchCard">
-      <h2>Contacts</h2>
-      <input id="searchInput" type="text" placeholder="Search (name, phone, email)" />
-      <div id="searchMessage" class="msg"></div>
-      <div class="table-wrapper">
-        <table id="contactsTable">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th class="hide-sm">Phone</th>
-              <th class="hide-sm">Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Filled dynamically -->
-          </tbody>
-        </table>
-      </div>
-      <div id="emptyState" class="empty hidden">No contacts found.</div>
-    </section>
-  </main>
-
-  <script src="js/app.js"></script>
 </body>
 </html>
 
