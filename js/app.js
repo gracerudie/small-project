@@ -174,8 +174,8 @@
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>${escapeHtml(c.FirstName)} ${escapeHtml(c.LastName)}</td>
-        <td class="hide-sm">${escapeHtml(c.Phone)}</td>
-        <td class="hide-sm">${escapeHtml(c.Email)}</td>
+        <td>${escapeHtml(c.Phone)}</td>
+        <td>${escapeHtml(c.Email)}</td>
         <td>
           <button class="action-btn" data-id="${c.contactId}">Delete</button>
         </td>`;
